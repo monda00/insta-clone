@@ -51,7 +51,7 @@ class Profile(models.Model):
     nickName = models.CharField(max_length=20)
     userProfile = models.OneToOneField(
         settings.AUTH_USER_MODEL, related_name='userProfile',
-        on_delte=models.CASCADE
+        on_delete=models.CASCADE
     )
     created_on = models.DateTimeField(auto_now_add=True)
     img = models.ImageField(blank=True, null=True,
