@@ -11,7 +11,7 @@ class CreateUserView(generics.CreateAPIView):
 
 
 class ProfileViewSet(viewsets.ModelViewSet):
-    queryset = Profile.objectsj.all()
+    queryset = Profile.objects.all()
     serializer_class = serializers.ProfileSerializer
 
     def perform_create(self, serializer):
@@ -27,7 +27,7 @@ class MyProfileListView(generics.ListAPIView):
 
 
 class PostViewSet(viewsets.ModelViewSet):
-    queryset = Post.objectsj.all()
+    queryset = Post.objects.all()
     serializer_class = serializers.PostSerializer
 
     def perform_create(self, serializer):
@@ -35,7 +35,7 @@ class PostViewSet(viewsets.ModelViewSet):
 
 
 class CommentViewSet(viewsets.ModelViewSet):
-    queryset = Comment.objectsj.all()
+    queryset = Comment.objects.all()
     serializer_class = serializers.CommentSerializer
 
     def perform_create(self, serializer):
