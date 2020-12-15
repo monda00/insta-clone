@@ -45,7 +45,7 @@ export const fetchAsyncCreateProf = createAsyncThunk(
 
 export const fetchAsyncUpdateProf = createAsyncThunk(
   "profile/put",
-  async (prifile: PROPS_PROFILE) => {
+  async (profile: PROPS_PROFILE) => {
     const uploadData = new FormData();
     uploadData.append("nickName", profile.nickName);
     profile.img && uploadData.append("img", profile.img, profile.img.name);
