@@ -1,5 +1,5 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { RootState } from '../../app/store';
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { RootState } from "../../app/store";
 import axios from "axios";
 import { PROPS_AUTHEN, PROPS_PROFILE, PROPS_NICKNAME } from "../types";
 import { profile } from 'console';
@@ -9,7 +9,7 @@ const apiUrl = process.env.REACT_APP_DEV_API_URL;
 export const fetchAsyncLogin = createAsyncThunk(
   "auth/post",
   async (authen: PROPS_AUTHEN) => {
-    const res = await axios.post('${apiUrl}authen/jwt/create', authen, {
+    const res = await axios.post(`${apiUrl}authen/jwt/create`, authen, {
       headers: {
         "Content-Type": "application/json",
       }
@@ -33,10 +33,10 @@ export const fetchAsyncRegister = createAsyncThunk(
 export const fetchAsyncCreateProf = createAsyncThunk(
   "profile/post",
   async (nickName: PROPS_NICKNAME) => {
-    const res = await axios.post('${apiUrl}api/profile/', nickName, {
+    const res = await axios.post(`${apiUrl}api/profile/`, nickName, {
       headers: {
         "Content-Type": "application/json",
-        Authorization: 'JWT ${localStorage.localJWT}',
+        Authorization: `JWT ${localStorage.localJWT}`,
       },
     });
     return res.data;
@@ -50,12 +50,12 @@ export const fetchAsyncUpdateProf = createAsyncThunk(
     uploadData.append("nickName", profile.nickName);
     profile.img && uploadData.append("img", profile.img, profile.img.name);
     const res = await axios.put(
-      '${apiUrl}api/profile/${profile.id}',
+      `${apiUrl}api/profile/${profile.id}/`,
       uploadData,
       {
         headers: {
           "Content-Type": "application/json",
-          Authorization: 'JWT ${localStorage.localJWT}',
+          Authorization: `JWT ${localStorage.localJWT}`,
         },
       }
     );
@@ -66,9 +66,9 @@ export const fetchAsyncUpdateProf = createAsyncThunk(
 export const fetchAsyncGetMyProf = createAsyncThunk(
   "profile/get",
   async () => {
-    const res = await axios.get('${apiUrl}api/profile/', {
+    const res = await axios.get(`${apiUrl}api/profile/`, {
       headers: {
-        Authorization: 'JWT ${localStorage.localJWT}',
+        Authorization: `JWT ${localStorage.localJWT}`,
       },
     });
     return res.data[0];
@@ -78,9 +78,9 @@ export const fetchAsyncGetMyProf = createAsyncThunk(
 export const fetchAsyncGetProfs = createAsyncThunk(
   "profiles/get",
   async () => {
-    const res = await axios.get('${apiUrl}api/profile/', {
+    const res = await axios.get(`${apiUrl}api/profile/`, {
       headers: {
-        Authorization: 'JWT ${localStorage.localJWT}',
+        Authorization: `JWT ${localStorage.localJWT}`,
       },
     });
     return res.data;
@@ -89,7 +89,7 @@ export const fetchAsyncGetProfs = createAsyncThunk(
 
 
 export const authSlice = createSlice({
-  name: 'auth',
+  name: "auth",
   initialState: {
     openSignIn: true,
     openSignUp: false,
@@ -129,7 +129,7 @@ export const authSlice = createSlice({
       state.openSignUp = true;
     },
     resetOpenSignUp(state) {
-      state.openSignUp = true;
+      state.openSignUp = false;
     },
     setOpenProfile(state) {
       state.openProfile = true;
@@ -137,7 +137,7 @@ export const authSlice = createSlice({
     resetOpenProfile(state) {
       state.openProfile = false;
     },
-    editNickName(state, action) {
+    editNickname(state, action) {
       state.myprofile.nickName = action.payload;
     },
   },
@@ -172,7 +172,7 @@ export const {
   resetOpenSignUp,
   setOpenProfile,
   resetOpenProfile,
-  editNickName,
+  editNickname,
 } = authSlice.actions;
 
 export const selectIsLoadingAuth = (state: RootState) => state.auth.isLoadingAuth;

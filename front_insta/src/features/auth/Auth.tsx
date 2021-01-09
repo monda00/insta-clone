@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 import { AppDispatch } from "../../app/store";
 import { useSelector, useDispatch } from "react-redux";
 import styles from "./Auth.module.css";
@@ -34,13 +34,13 @@ const customStyles = {
 
     width: 280,
     height: 350,
-    padding: "50%",
+    padding: "50px",
 
     transform: "translate(-50%, -50%)",
   },
 };
 
-export const Auth: React.FC = () => {
+const Auth: React.FC = () => {
   Modal.setAppElement("#root");
   const openSignIn = useSelector(selectOpenSignIn);
   const openSignUp = useSelector(selectOpenSignUp);
@@ -172,7 +172,7 @@ export const Auth: React.FC = () => {
           onSubmit={async (values) => {
             await dispatch(fetchCredStart());
             const result = await dispatch(fetchAsyncLogin(values));
-            if (fetchAsyncRegister.fulfilled.match(result)) {
+            if (fetchAsyncLogin.fulfilled.match(result)) {
               await dispatch(fetchAsyncGetProfs());
               //await dispatch(fetchAsyncGetPosts());
               //await dispatch(fetchAsyncGetComments());
@@ -199,7 +199,7 @@ export const Auth: React.FC = () => {
           }) => (
             <div>
               <form onSubmit={handleSubmit}>
-                <div className={styles.suth_signUp}>
+                <div className={styles.auth_signUp}>
                   <h1 className={styles.auth_title}>SNS clone</h1>
                   <br />
                   <div className={styles.auth_progress}>
@@ -215,10 +215,11 @@ export const Auth: React.FC = () => {
                     onBlur={handleBlur}
                     value={values.email}
                   />
-                  <br />
+
                   {touched.email && errors.email ? (
                     <div className={styles.auth_error}>{errors.email}</div>
                   ) : null}
+                  <br />
 
                   <TextField
                     placeholder="password"
@@ -261,7 +262,7 @@ export const Auth: React.FC = () => {
         </Formik>
       </Modal>
     </>
-  )
-}
+  );
+};
 
 export default Auth;
